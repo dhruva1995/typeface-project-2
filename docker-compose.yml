@@ -1,0 +1,33 @@
+version: "3"
+services:
+  activity-fanout-service:
+    container_name: activity-fanout-service
+    image: activity-fanout-service
+    build: ./activity-fanout-service/
+    ports:
+      - 8080:8080
+    depends_on:
+      - activity-db
+      - user-feed-cache
+
+  activity-db:
+    container_name: activity-db
+    image: mongo
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+  user-feed-cache:
+    container_name: user-feed-cache
+    image: redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5

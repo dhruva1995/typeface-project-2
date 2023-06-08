@@ -1,0 +1,60 @@
+
+FanoutClient {
+
+
+    notify(List<User> users, Activity template) {
+        new Runnable() {
+            run() {
+                    sqs.push(template, users);
+                
+            }
+        }.start();
+    }
+
+
+    
+}
+
+Workspace {
+    List<User> activeUsers;
+}
+
+
+
+createFile(User createUser, File file,  workspace) {
+    //persist file to blobstore get url
+    teplate = "Hi $targetUser $createUser created a file in $template wann checkit out try this $url";
+    result = eval(template, url, createUser);
+    fanout.notify(workpace.getActiveUser(), template);
+
+}
+
+=====================================================
+FanoutService {
+
+    onActivity(Activity template, List<Users> users, message) {
+        for(User user: users) {
+            Activity finalActivity = eval(template, user);
+            foutRepo.save(user);
+            notificationClient.notify(finalActivity);
+        }
+
+
+    }
+
+
+    listActivities(User currentUser) {
+
+        List<Activity> activities = foutRepo.findByUserOrderByTimestamp(user);
+        return activities;
+
+    }
+
+
+
+
+}
+Line items:
+===========
+1. Wire the code with Redis
+2. Realtime Notifications with Websocket 

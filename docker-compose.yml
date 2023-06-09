@@ -9,6 +9,7 @@ services:
     depends_on:
       - activity-db
       - user-feed-cache
+      - notification-cache
 
   activity-db:
     container_name: activity-db
@@ -51,3 +52,13 @@ services:
       - activity-db
       - user-feed-cache
       - activity-cache
+  notification-cache:
+    container_name: notification-cache
+    image: redis
+    ports:
+      - 6381:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5

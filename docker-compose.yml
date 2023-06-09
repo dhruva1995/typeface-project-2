@@ -19,7 +19,7 @@ services:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 5s
       timeout: 5s
-      retries: 3
+      retries: 5
       start_period: 5s
   user-feed-cache:
     container_name: user-feed-cache
@@ -31,3 +31,23 @@ services:
       interval: 1s
       timeout: 3s
       retries: 5
+  activity-cache:
+    container_name: activity-cache
+    image: redis
+    ports:
+      - 6380:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+  activity-api-service:
+    container_name: activity-api-service
+    image: activity-api-service
+    build: ./activity-api-service/
+    ports:
+      - 8081:8081
+    depends_on:
+      - activity-db
+      - user-feed-cache
+      - activity-cache

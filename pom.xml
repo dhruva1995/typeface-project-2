@@ -27,7 +27,7 @@
     <module>activity-service-commons</module>
     <module>activity-api-service</module>
     <module>activity-fanout-service</module>
-          
+    <module>notification-session-service</module>
     
       
   </modules>

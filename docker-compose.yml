@@ -62,3 +62,11 @@ services:
       interval: 1s
       timeout: 3s
       retries: 5
+  notification-session-service:
+    container_name: notification-session-service
+    image: notification-session-service
+    build: ./notification-session-service/
+    ports:
+      - 8082:8082
+    depends_on:
+      - notification-cache

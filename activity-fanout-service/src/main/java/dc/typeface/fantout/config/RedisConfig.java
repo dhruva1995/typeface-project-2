@@ -17,14 +17,14 @@ import lombok.extern.log4j.Log4j2;
 public class RedisConfig {
 
     @Value("${user-feed-cache.host:localhost}")
-    private String cacheHost;
+    private String userFeedCacheHost;
 
     @Value("${user-feed-cache.port:6379}")
-    private int cachePort;
+    private int userFeedCachePort;
 
     public JedisConnectionFactory redisConnectionFactor() {
-        log.info("Picking the instance {}:{} as user-feed-cache", cacheHost, cachePort);
-        var cf = new JedisConnectionFactory(new RedisStandaloneConfiguration(cacheHost, cachePort));
+        log.info("Picking the instance {}:{} as user-feed-cache", userFeedCacheHost, userFeedCachePort);
+        var cf = new JedisConnectionFactory(new RedisStandaloneConfiguration(userFeedCacheHost, userFeedCachePort));
         cf.afterPropertiesSet();
         return cf;
     }

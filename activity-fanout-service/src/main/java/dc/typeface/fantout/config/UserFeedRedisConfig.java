@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Configuration
 @Log4j2
-public class RedisConfig {
+public class UserFeedRedisConfig {
 
     @Value("${user-feed-cache.host:localhost}")
     private String userFeedCacheHost;

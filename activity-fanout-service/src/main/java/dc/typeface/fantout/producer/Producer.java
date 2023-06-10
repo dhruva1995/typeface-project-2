@@ -48,8 +48,8 @@ public class Producer {
 
     private List<String> getRandomUsers(int count) {
 
-        return IntStream.range(0, userCount)
-                .map(i -> RANDOM.nextInt(count + 1))
+        return IntStream.range(0, count)
+                .map(i -> RANDOM.nextInt(userCount))
                 .boxed()
                 .distinct()
                 .map(i -> "user-" + i)

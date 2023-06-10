@@ -94,7 +94,14 @@ export const ActivitiesScreen: React.FC<{ user: string }> = ({ user }) => {
         <Typography variant="h4" textAlign="center" marginBottom={"0.5rem"}>
           Notifications
         </Typography>
-        <ActivityList activities={notifications}></ActivityList>
+        {notifications && (
+          <ActivityList activities={notifications}></ActivityList>
+        )}
+        {notifications.length === 0 && (
+          <Typography variant="h5" textAlign="center">
+            You have no notifications!
+          </Typography>
+        )}
       </Grid>
     </>
   );
@@ -133,7 +140,6 @@ export const ActivitiesScreen: React.FC<{ user: string }> = ({ user }) => {
             </Button>
 
             <IconButton
-              disabled={notifications.length === 0}
               size="large"
               aria-label={`show ${notifications.length} new notifications`}
               color="inherit"

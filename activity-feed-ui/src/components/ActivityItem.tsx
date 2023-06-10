@@ -15,7 +15,13 @@ const ActivityItem: React.FC<ActivityItemInput> = ({ activity }) => {
   return (
     <Card className={classes.activityItem}>
       <CardContent>
-        <Typography variant="body1">{activity.message}</Typography>
+        <Typography
+          variant="body1"
+          component="p"
+          className={classes.activityMessage}
+        >
+          {activity.message}
+        </Typography>
 
         <Typography
           className={classes.activityItemTimeSince}

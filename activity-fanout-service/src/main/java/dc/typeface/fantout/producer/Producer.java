@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
@@ -41,7 +42,7 @@ public class Producer {
         int usersToFanOut = Math.max(RANDOM.nextInt(userCount) / fanOutRatio, 1);
         jmsTemplate.convertAndSend(queueName,
                 new ActivityMessage(getRandomUsers(usersToFanOut),
-                        "Welcome to workspace alpha",
+                        getRandomMessage(),
                         Instant.now().toEpochMilli()));
     }
 
@@ -53,6 +54,11 @@ public class Producer {
                 .distinct()
                 .map(i -> "user-" + i)
                 .collect(Collectors.toList());
+    }
+
+    private String getRandomMessage() {
+        return RandomStringUtils.randomAlphabetic(64, 200);
+
     }
 
 }

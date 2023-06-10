@@ -8,3 +8,7 @@
 .activityItemTimeSince {
   text-align: right;
 }
+
+.activityMessage {
+  word-break: break-all;
+}

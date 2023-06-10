@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build & cpx build/* D://data/test",
+    "build": "react-scripts build & cpx build/** ./../activity-api-service/src/main/resources/static",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -1,7 +1,7 @@
 ## How to run this
 
 1. PreRequisites : Ensure maven, java 17, npm to be installed in your system along with docker
-2. Build all apps by running `mvn clean install`.
+2. Clone the repo and build all apps by running `mvn clean install`.
 3. post that run `docker compose up`.
 4. Navigate to http://localhost:8081 and enjoy the show!!!
 

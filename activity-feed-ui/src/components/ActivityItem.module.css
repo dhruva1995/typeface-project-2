@@ -1,0 +1,10 @@
+.activityItem {
+  margin: 0.25rem auto;
+  min-width: 275;
+  width: 100%;
+  max-width: 700px;
+}
+
+.activityItemTimeSince {
+  text-align: right;
+}

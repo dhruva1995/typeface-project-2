@@ -1,9 +1,10 @@
 ## How to run this
 
 1. PreRequisites : Ensure maven, java 17, npm to be installed in your system along with docker
-2. Clone the repo and build all apps by running `mvn clean install`.
-3. post that run `docker compose up`.
-4. Navigate to http://localhost:8081 and enjoy the show!!!
+2. Clone the repo to your local machine.
+3. Build the Applications: Open a terminal and navigate to the cloned repository. Run the following command to build all the apps using Maven `mvn clean install`.
+4. Start the Docker Containers: After the build process is complete, run the following command to start the Docker containers `docker compose up`.
+5. Navigate to http://localhost:8081 and enjoy the show!!!
 
 Both the above steps may take couple of minutes to complete so please be patient.
 
@@ -15,7 +16,7 @@ Both the above steps may take couple of minutes to complete so please be patient
 4. While implementing, I implemented all components as a single node (container) components. Probably isolating queue, producer from the fanout service also makes it horizontally scalable.
 5. In interview I talked about template evaluation at the fanout service, I haven't implemented it as I thought that doesn't really makes a big difference in the overall architecture.
 6. Assumed a system with 100 users, with names user-0, user-1,.....user-99.
-7. No Authenticationa and Authorization.
+7. No Authentication and Authorization.
 
 ## For design in interview and design implemented as well as website walk through
 
@@ -61,7 +62,7 @@ Please go through this [Microsoft's Whiteboard](https://wbd.ms/share/v2/aHR0cHM6
 2. This service act like a pipe between notification-cache and the active user.
 3. User can impersonate via many browser, and all browser tabs are notified, and treated as different devices.
 
-### 8. frontend
+### 8. frontend / user
 
 1. User opens the link [http://localhost:8081](http://localhost:8081) in a browser.
 2. Upon user impersonating as some registed user(say user-58), the fronend fetches the activity list for him/her, as well opens a websocket connect to notification-session-service to listen for live activities getting posted.
@@ -80,7 +81,7 @@ Please feel free to reach out to me for any details.
 
 ### Challenges
 
-1. Came to know the issues with the latest jakarta sepc changes requires one to put additional jars to activate ActiveMQ later found a guy raised a cr for this(https://github.com/spring-guides/gs-messaging-jms/pull/35).
+1. Came to know the issues after significant investigation that, with the latest jakarta sepc changes requires one to put additional jars to activate ActiveMQ, later found a guy raised a cr for this(https://github.com/spring-guides/gs-messaging-jms/pull/35).
 2. There are bunch of guides for integrating spring boot with websockets via STOMP and message broker, it required me to step back and think I need to understand websockets more in this context than using with stomp, that way I unserstood websockets some more and I implemented notification session service with websockets myself instead of deligating this to spring boot/STOMP broker
 
 ## Good to have but I missed due to time constraints.

@@ -20,9 +20,6 @@ export const ActivitiesScreen: React.FC<{ user: string }> = ({ user }) => {
   const [notifications, setNotifications] = React.useState<Activity[]>([]);
   const [dataFetched, setDataFetched] = React.useState(false);
   const [error, setError] = React.useState<Error>();
-  React.useEffect(() => {
-    reset();
-  }, []);
 
   const { lastMessage } = useWebSocket(
     `ws://localhost:8082/notifications/${user}`,
@@ -52,27 +49,33 @@ export const ActivitiesScreen: React.FC<{ user: string }> = ({ user }) => {
     }
   }, [lastMessage]);
 
-  const reset = async () => {
-    setFeed([]);
-    setNotifications([]);
-    setDataFetched(false);
-    try {
-      const response = await fetch(`http://localhost:8081/api/v1/feed/${user}`);
-      if (response.ok) {
-        const result = await response.json();
-        setFeed(result);
-        setDataFetched(true);
-      } else {
-        throw new Error(
-          `Failed fetching response: status-text=${response.statusText}`
+  React.useEffect(() => {
+    const reset = async () => {
+      setFeed([]);
+      setNotifications([]);
+      setDataFetched(false);
+      try {
+        const response = await fetch(
+          `http://localhost:8081/api/v1/feed/${user}`
         );
+        if (response.ok) {
+          const result = await response.json();
+          setFeed(result);
+          setDataFetched(true);
+        } else {
+          throw new Error(
+            `Failed fetching response: status-text=${response.statusText}`
+          );
+        }
+      } catch (e) {
+        setDataFetched(true);
+        console.log(e);
+        setError(e as Error);
       }
-    } catch (e) {
-      setDataFetched(true);
-      console.log(e);
-      setError(e as Error);
-    }
-  };
+    };
+
+    reset();
+  }, [user]);
 
   const [showNotifications, setShowNotifications] = React.useState(false);
 

@@ -49,20 +49,20 @@ Please go through this [Microsoft's Whiteboard](https://wbd.ms/share/v2/aHR0cHM6
 1. This service serves the HTML conetent to the user.
 2. Serves the initial HttpGet request, by retriving the corresponding user's activity feed from activity-feed-cache and retriving activity message from (activity-cache -> activity db) setup.
 
-### 6. notification-cache
+### 6. notification-cache (redis)
 
 1. Possibly tries to holds a pubsub for each user.
 2. Upon getting a publish call from fanout-service, this is current redis pub sub behaviour.
    i. If the user is active and connected to this cache (via notification service), the cache tries to deliver the message to the user.
    ii. If the user is inactive drops the message.
 
-### 7. notification-session-service
+### 7. notification-session-service (spring boot app)
 
 1. When user launch the webpage and impersonate as the exisiting users, the frontend opends a webscoket connection to this service.
 2. This service act like a pipe between notification-cache and the active user.
 3. User can impersonate via many browser, and all browser tabs are notified, and treated as different devices.
 
-### 8. frontend / user
+### 8. frontend / user (react app)
 
 1. User opens the link [http://localhost:8081](http://localhost:8081) in a browser.
 2. Upon user impersonating as some registed user(say user-58), the fronend fetches the activity list for him/her, as well opens a websocket connect to notification-session-service to listen for live activities getting posted.
@@ -78,6 +78,7 @@ Please feel free to reach out to me for any details.
 1. Understood websockets, implemented communication between the client/server using them.
 2. Understood Redis, integrating it with spring boot, this is very first time I used it, I used lists, pubsub and used it as cache, I really saw the difference in round about time getting reduce from 1050 ms to 53ms upon caching the data.
 3. Experimented and learnt material ui components, and how to integrate them.
+4. Created aparent pom and hierarchical project structure, not a big thing but this helped to build all projects once instead of building individual projects.
 
 ### Challenges
 
@@ -86,6 +87,6 @@ Please feel free to reach out to me for any details.
 
 ## Good to have but I missed due to time constraints.
 
-1. User logged in with proper auth.
-2. Integrate the component services with service discovery.
-3. User some config store to manage the config paramters currently I managed them via .env files.
+1. Users logging in with proper auth.
+2. Integrate each component services with service discovery, so the urls could me more dynamic.
+3. Could have used some config store to manage the config paramters, currently I managed them via .env files.

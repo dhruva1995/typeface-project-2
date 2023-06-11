@@ -67,6 +67,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>activity-api-service</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -79,7 +81,6 @@
 						</exclude>
 					</excludes>
 
-					<finalName>activity-api-service</finalName>
 
 				</configuration>
 			</plugin>

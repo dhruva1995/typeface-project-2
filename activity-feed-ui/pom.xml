@@ -11,6 +11,7 @@
 	</parent>
 	<groupId>dc.typeface</groupId>
 	<artifactId>activity-feed-ui</artifactId>
+	<packaging>pom</packaging>
 
 	<name>activity-feed-ui</name>
 	<description>React Project to serve the frontend of the Activity service</description>

@@ -160,7 +160,7 @@ export const ActivitiesScreen: React.FC<{ user: string }> = ({ user }) => {
               Activites fetched
             </Typography>
             {feed && <ActivityList activities={feed!}></ActivityList>}
-            {feed?.length == 0 && (
+            {feed?.length === 0 && (
               <Typography variant="h5" textAlign="center">
                 You have no activity feed!
               </Typography>

@@ -3,13 +3,6 @@ import "./App.css";
 import { ActivitiesScreen } from "./components/ActivitiesScreen";
 import SelectUser from "./components/SelectUser";
 
-enum PageState {
-  USER_NOT_SELECTED,
-  FETCHING_DATA,
-  DATA_RENDERING,
-  ERROR,
-}
-
 function App() {
   const [user, setUser] = React.useState<string>();
 

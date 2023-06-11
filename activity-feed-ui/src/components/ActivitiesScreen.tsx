@@ -40,7 +40,7 @@ export const ActivitiesScreen: React.FC<{ user: string }> = ({ user }) => {
   );
 
   React.useEffect(() => {
-    if (lastMessage && lastMessage.data) {
+    if (lastMessage?.data) {
       const newActivity = JSON.parse(lastMessage.data) as Activity;
       setNotifications((oldNotifications) => [
         newActivity,
